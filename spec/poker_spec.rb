@@ -29,7 +29,7 @@ describe Deck do
     end
 
     it "each card should be a Card object" do
-      expect { deck.cards.all? { |card| card.class == Class } }.to be_true
+      expect { deck.cards.all? { |card| card.class == Card } }.to be_true
     end
   end
 
@@ -58,7 +58,7 @@ describe Hand do
 
   describe "#combo" do
     it "Hand with A_Diamond, K_Diamond, Q_Diamond, J_Diamond, 10_Diamond" do
-      hand.cards = [Card.new("A", :Diamonds), Card.new("K", :Diamonds), Card.new("Q", :Diamonds), Card.new("J", :Diamonds), Card.new(10, :Diamonds)]
+      hand.cards = [Card.new(14, :Diamonds), Card.new(13, :Diamonds), Card.new(12, :Diamonds), Card.new(11, :Diamonds), Card.new(10, :Diamonds)]
       expect(hand.combo).to eq(:Royal_Flush)
     end
 
@@ -73,7 +73,7 @@ describe Hand do
     end
 
     it "Hand with Q_Club, 10_Club, 7_Club, 6_Club, 4_Club should be flush" do
-      hand.cards = [Card.new("Q", :Clubs), Card.new(10, :Clubs), Card.new(7, :Clubs), Card.new(6, :Clubs), Card.new(4, :Clubs)]
+      hand.cards = [Card.new(12, :Clubs), Card.new(10, :Clubs), Card.new(7, :Clubs), Card.new(6, :Clubs), Card.new(4, :Clubs)]
       expect(hand.combo).to eq(:Flush)
     end
 
@@ -83,12 +83,12 @@ describe Hand do
     end
 
     it "Hand with 4_Heart, 10_Jack, A_Club, 5_Heart, 2_Diamond should return nil" do
-      hand.cards = [Card.new(4, :Hearts), Card.new(10, :Jacks), Card.new("A", :Clubs), Card.new(5, :Hearts), Card.new(2, :Diamonds)]
+      hand.cards = [Card.new(4, :Hearts), Card.new(10, :Jacks), Card.new(14, :Clubs), Card.new(5, :Hearts), Card.new(2, :Diamonds)]
       expect(hand.combo).to eq(nil)
     end
 
     it "Hand with 9Club, 9_Spade, 9_Diamond, 9_Heart, J_Heart" do
-      hand.cards = [Card.new(9, :Clubs), Card.new(9, :Spades), Card.new(9, :Diamonds), Card.new(9, :Hearts), Card.new("J", :Heart)]
+      hand.cards = [Card.new(9, :Clubs), Card.new(9, :Spades), Card.new(9, :Diamonds), Card.new(9, :Hearts), Card.new(11, :Heart)]
       expect(hand.combo).to eq(:Four_of_a_Kind)
     end
   end
